@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+ 
+{% block content %}
+<div class="jumbo">
+
+  <h2>Talk to an AI</h2>
+  <p>We're ready to lead you into the future of AI powered Sales Assistant for Your Inside Sales Team.</p>
+
+</div>
+
+ <p>Ask a Scribe expert how we can help:
+<ul>
+  <li>
+    See our software in action: Request a customized product demonstration and discover how you can take your business to the next level.
+  </li>
+  <li>
+    Explore life at Scribe: Learn about careers, or get in touch with a Scribe representative.
+  </li>
+</ul>
+</p>
+
+  {% if success %}
+    <p>Thank you for your message. One of our team member will get back to you shortly.</p>
+ 
+  {% else %}
+ 
+    {% for message in form.name.errors %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+ 
+    {% for message in form.email.errors %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+ 
+    {% for message in form.subject.errors %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+ 
+    {% for message in form.message.errors %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+ 
+    <form action="{{ url_for('contact') }}" method=post>
+      {{ form.hidden_tag() }}
+ 
+      {{ form.name.label }}
+      {{ form.name }}
+ 
+      {{ form.email.label }}
+      {{ form.email }}
+ 
+      {{ form.subject.label }}
+      {{ form.subject }}
+ 
+      {{ form.message.label }}
+      {{ form.message }}
+ 
+      {{ form.submit }}
+    </form>
+ 
+  {% endif %}
+{% endblock %} 
